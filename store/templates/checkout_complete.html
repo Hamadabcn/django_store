@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="bg-white py-4">
+        <h1 class="text-center text-secondary">اكتمل الطلب</h1>
+    </div>
+    <div class="container my-5">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="text-center">
+                    <i class="lni lni-checkmark-circle text-muted display-1"></i>
+                </h1>
+                <p class="text-center mt-4">
+                    لقد تمت عملية الشراء بنجاح، سيصلك بريد إلكتروني يحتوي على روابط
+                    لتحميل الكتب التي طلبتها!
+                </p>
+                <p class="text-center">
+                    <a href="/" class="btn btn-primary">عودة إلى الصفحة الرئيسية</a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

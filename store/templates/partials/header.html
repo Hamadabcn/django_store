@@ -1,0 +1,48 @@
+{% load i18n %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container">
+        <a class="navbar-brand" href="/"> {% trans 'Happy Books Store' %} </a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+                class="collapse navbar-collapse mt-2 mt-lg-0"
+                id="navbarSupportedContent">
+            {% include 'partials/header_search.html' %}
+            <ul class="navbar-nav my-2 my-lg-0">
+                <li class="nav-item">
+                    <a href="{% url 'store.cart' %}" class="btn btn-outline-dark" type="button">
+                        {% trans 'Cart' %} (<span id="cart-items-count">{{ cart_products|length }}</span>)
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <div class="container">
+        <div
+                class="collapse navbar-collapse mt-2 mt-lg-0"
+                id="navbarSupportedContent"
+        >
+            <ul class="navbar-nav my-2 my-lg-0">
+                {% for category in categories %}
+                    <li class="nav-item">
+                        <a class="nav-link mx-1" href="{% url 'store.category' category.id %}" role="button">
+                            {{ category.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>

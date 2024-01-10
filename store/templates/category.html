@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    {% if category.name %}
+        {% include 'common/page_title.html' with title=category.name %}
+    {% else %}
+        {% include 'common/page_title.html' with title='All Categories' %}
+    {% endif %}
+    <div class="container my-5">
+        <section>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="list-group">
+                        <a href="{% url 'store.category' %}"
+                           class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            {% trans 'All' %}
+                        </a>
+                        {% for category in categories %}
+                            <a href="{% url 'store.category' category.id %}"
+                               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                {{ category.name }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        {% for product in page_obj %}
+                            <div class="col-md-4">
+                                {% include 'common/product_card.html' with product=product %}
+                            </div>
+                        {% empty %}
+                            <div class="card-mb-4">
+                                <div class="card-body py-5">
+                                    <h5 class="card-title text-center">
+                                        {% trans 'We were not able to find any books' %}
+                                    </h5>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% if page_obj.paginator.count > 0 %}
+                        <nav>
+                            <ul class="pagination justify-content-center">
+                                {% if page_obj.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">{% trans 'Previous' %}</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <span class="page-link">{% trans 'Previous' %}</span>
+                                    </li>
+                                {% endif %}
+                                {% if page_obj.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">{% trans 'Next' %}</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <span class="page-link">{% trans 'Next' %}</span>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

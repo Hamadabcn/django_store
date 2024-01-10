@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load i18n my_filter %}
+
+{% block content %}
+    <div class="bg-white py-4">
+        <h1 class="text-center text-secondary">{% trans 'Cart' %}</h1>
+    </div>
+    <div class="container my-5">
+        {% for product in cart_products %}
+            <div class="card my-2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2 text-center mb-2">
+                            <img
+                                    src="{{ product.image.url }}"
+                                    alt="{{ product.name }}"
+                                    title=""
+                                    width="150"
+                                    class="img-thumbnail"
+                            />
+                        </div>
+                        <div class="col my-auto text-center">
+                            {{ product.name }}
+                        </div>
+                        <div class="col-md-2 col-xs-6 my-auto text-center">
+                            <strong>{{ product.price|currency }}</strong>
+                        </div>
+                        <div class="col-md-2 my-auto text-center">
+                            <button class="btn btn-secondary my-2" type="button" data-url="{% url 'store.cart_remove' product.id %}" onclick="cartRemove(this)">
+                                <i class="lni lni-trash-can text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="h-100 p-5 bg-white border rounded-3 text-center">
+                <p class="fs-1">{% trans 'Your cart is empty' %}</p>
+                <p>
+                    <i class="lni lni-cart fs-1 text-muted"></i>
+                </p>
+            </div>
+        {% endfor %}
+        {% if cart_total > 0 %}
+            <div class="row bd-highlight mt-2">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <td>{% trans 'Price' %}</td>
+                                    <td>{{ cart_total|currency }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{% trans 'Total' %}</td>
+                                    <td>{{ cart_total|currency }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="d-grid gap-2">
+                                <a href="{% url 'store.checkout' %}" class="btn btn-primary">
+                                    {% trans 'Proceed to checkout' %}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
