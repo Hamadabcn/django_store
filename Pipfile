@@ -11,4 +11,3 @@ django = "*"
 
 [requires]
 python_version = "3.11"
-paypal = "2.0"
