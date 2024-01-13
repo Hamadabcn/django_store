@@ -3,10 +3,10 @@ const stripeSubmit = document.getElementById('stripe-submit');
 
 async function createStripeSession() {
 
-  switchPaymentMethod('stripe', '')
-
   const form = document.getElementById('form-user-info');
   const formData = new FormData(form);
+
+  switchPaymentMethod('stripe', '')
 
   stripeSubmit.disabled = true;
   try {
@@ -44,7 +44,7 @@ async function _stripeFormSubmit(e) {
   if (error.type === "card_error" || error.type === "validation_error") {
     notyf.error(error.message);
   } else {
-    notyf.error("عذرًا، هنالك خطأ ما حصل خلال عملية الدفع.");
+    notyf.error("Sorry, an error occurred during the payment process");
   }
   stripeSubmit.disabled = false;
 }
@@ -59,13 +59,13 @@ async function _checkStripePaymentStatus() {
   const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
   switch (paymentIntent.status) {
     case "succeeded":
-      notyf.success("لقد تمت عملية الدفع بنجاح!");
+      notyf.success("Your payment has been completed successfully");
       break;
     case "processing":
-      notyf.success("عملية الدفع قيد المعالجة");
+      notyf.success("Payment is being processed");
       break;
     default:
-      notyf.error("عذرًا، هنالك خطأ ما حصل خلال عملية الدفع.");
+      notyf.error("Sorry, an error occurred during the payment process");
       break;
   }
 }

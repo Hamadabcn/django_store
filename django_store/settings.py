@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os.path
 from pathlib import Path
+from django.conf import settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-df_h#y!0&vyldj#+)$vb1#m)#yqc-#$)1bw8rolc3+#^c+9t4q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'happy-book-store.com',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -37,12 +41,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'paypal.standard.ipn',
     'store',
     'checkout',
+    'reports',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -131,3 +138,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = '43cf7d5dec1ad6'
+EMAIL_HOST_PASSWORD = 'ad693ea4116de2'
+EMAIL_PORT = '2525'
+
+SITE_URL = 'http://127.0.0.1:8000'
+
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51OXT6NLQByQGef51ob2b4qIxY01vrjIYSqRLnqKpN08tcMJhMyb8DVxUNaIounnrDyxv4oTWECGKFBYWA9vHtjEq00Ck6jYToW'
+STRIPE_SECRET_KEY = 'sk_test_51OXT6NLQByQGef51Q1YObvsEgwFe3OGUS068mnlXyOSKqCfgLoM0gdJjPTmE3r8HCFLdEQuc6KLnrKzKWznb0RjF00jJbYfALb'
+STRIPE_ENDPOINT_SECRET = 'whsec_fd6692e18510a360a13152eb9f4bb691af26dc5570a4f307164b621531a5a1ce'
+
+PAYPAL_TEST = True
+PAYPAL_EMAIL = 'sb-eiwjh26708209@business.example.com'
+CURRENCY = 'EUR'

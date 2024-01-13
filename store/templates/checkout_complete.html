@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block content %}
     <div class="bg-white py-4">
-        <h1 class="text-center text-secondary">اكتمل الطلب</h1>
+        <h1 class="text-center text-secondary">{% trans 'Request completed' %}</h1>
     </div>
     <div class="container my-5">
         <div class="card">
@@ -11,11 +11,10 @@
                     <i class="lni lni-checkmark-circle text-muted display-1"></i>
                 </h1>
                 <p class="text-center mt-4">
-                    لقد تمت عملية الشراء بنجاح، سيصلك بريد إلكتروني يحتوي على روابط
-                    لتحميل الكتب التي طلبتها!
+                    {% trans '!Your purchase has been completed successfully, you will receive an email containing links To download the books you requested' %}
                 </p>
                 <p class="text-center">
-                    <a href="/" class="btn btn-primary">عودة إلى الصفحة الرئيسية</a>
+                    <a href="/" class="btn btn-primary">{% trans 'Homepage' %}</a>
                 </p>
             </div>
         </div>

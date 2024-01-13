@@ -1,101 +1,88 @@
 {% extends 'base.html' %}
+{% load i18n my_filter %}
 
 {% block content %}
-    <div class="bg-white py-4">
-        <h1 class="text-center text-secondary">الدفع</h1>
-    </div>
+    {% include 'common/page_title.html' with title='Checkout' %}
     <div class="container my-5">
         <div class="row bd-highlight">
             <div class="col-md-12">
-                <h4 class="my-3 text-center">
-                    <div class="alert alert-success py-3">
-                        <h3 class="text-center">المبلغ</h3>
-                        <h3 class="text-center">55,0 $</h3>
-                    </div>
-                </h4>
+                <div class="alert alert-success py-3">
+                    <h3 class=" text-center">
+                        {% trans 'Amount to pay' %}
+                    </h3>
+                    <h3 class=" text-center">
+                        {{ cart_total|currency }}
+                    </h3>
+                </div>
             </div>
             <div class="col-12">
-                <h4 class="my-3">معلوماتك الشخصية</h4>
+                <h4 class="my-3">
+                    {% trans 'Your information' %}
+                </h4>
                 <div class="card">
                     <div class="card-body">
                         <form id="form-user-info">
+                            {% csrf_token %}
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="firstNameInput" class="form-label"
-                                        >الاسم</label
-                                        >
-                                        <input
-                                                type="text"
-                                                class="form-control"
-                                                id="firstNameInput"
-                                                name="first_name"
-                                                required
-                                        />
+                                        <label for="firstNameInput" class="form-label">{% trans 'First Name' %}</label>
+                                        <input type="text" class="form-control" id="firstNameInput" name="first_name"
+                                               required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="lastNameInput" class="form-label"
-                                        >الكنية</label
-                                        >
-                                        <input
-                                                type="text"
-                                                class="form-control"
-                                                id="lastNameInput"
-                                                name="last_name"
-                                                required
-                                        />
+                                        <label for="lastNameInput" class="form-label">{% trans 'Last Name' %}</label>
+                                        <input type="text" class="form-control" id="lastNameInput" name="last_name"
+                                               required>
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="emailInput" class="form-label"
-                                >بريد إلكتروني</label
-                                >
-                                <input
-                                        type="email"
-                                        class="form-control"
-                                        id="emailInput"
-                                        name="email"
-                                        required
-                                />
+                                <label for="emailInput" class="form-label">{% trans 'Email' %}</label>
+                                <input type="email" class="form-control" id="emailInput" name="email" required>
                             </div>
                         </form>
                     </div>
                 </div>
-                <h4 class="my-3">وسيلة الدفع</h4>
+                <h4 class="my-3">
+                    {% trans 'Payment Method' %}
+                </h4>
                 <div class="row">
                     <div class="col-md-6">
-                        <div id="pm-paypal" class="card" role="button">
+                        <div class="card" role="button" onclick="createPaypalSession()">
                             <div class="card-body text-center">
-                                <p>بايبال</p>
+                                <p>
+                                    {% trans 'Paypal' %}
+                                </p>
                                 <i class="lni lni-paypal-original fs-1"></i>
                             </div>
                         </div>
                     </div>
-                    <div id="pm-stripe" class="col-md-6">
-                        <div class="card" role="button">
+                    <div class="col-md-6">
+                        <div class="card" role="button" onclick="createStripeSession()">
                             <div class="card-body text-center">
-                                <p>بطاقة ائتمانية</p>
+                                <p>
+                                    {% trans 'Credit Card' %}
+                                </p>
                                 <i class="lni lni-credit-cards fs-1"></i>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="payment-cont" class="card mt-3 d-none">
-                    <div class="card-body text-center">
-                        <div id="paypal-cont"></div>
-                        <div id="stripe-cont">
-                            <form id="payment-form">
-                                <div id="payment-element"></div>
-                                <div class="d-grid gap-2 my-3">
-                                    <button class="btn btn-primary" type="submit">
-                                        إتمام عملية الشراء
+                    <div class="col-md-12">
+                        <div id="payment-form-container">
+                            <div id="stripe-card" class="card my-3 p-3" style="display: none">
+                                <form id="payment-form">
+                                    <div id="payment-element">
+                                    </div>
+                                    <button id="stripe-submit" class="btn btn-primary mt-3">
+                                        {% trans 'Pay Now' %}
                                     </button>
-                                </div>
-                                <div id="payment-message" class="hidden"></div>
-                            </form>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="paypal-card" class="card my-3 p-3" style="display: none">
                         </div>
                     </div>
                 </div>
