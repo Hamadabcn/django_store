@@ -5,11 +5,7 @@ name = "pypi"
 
 [packages]
 django = "*"
-psycopg2 = "*"
-django = "*"
-whitenoise = "*"
-gunicorn = "*"
-paypal = "*"
+
 
 [dev-packages]
 
