@@ -16,5 +16,3 @@ Educational Academy project using Django:
 8. The final project must be uploaded to one of the platforms so that we can preview it.
 
 9. Anything not explained in the text is left to your imagination. You can add and implement anything you deem appropriate for the project.
-
-10. The project implementation period is 15 days.
