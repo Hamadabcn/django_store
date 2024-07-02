@@ -3,22 +3,31 @@
 
 <div class="product card mb-4">
     <img
-            src="{{ product.image.url }}"
-            class="card-img-top"
-            alt="{{ product.name }}"
+        src="{{ product.image.url }}"
+        class="card-img-top"
+        alt="{{ product.name }}"
     />
     <div
-            class="card-img-overlay d-flex flex-column align-items-center justify-content-center"
+        class="card-img-overlay d-flex flex-column align-items-center justify-content-center"
     >
-        <a class="btn btn-outline-light" data-url="{% url 'store.cart_add' product.id %}" onclick="cartUpdate(this)">{% trans 'Add to cart' %}</a
-        >
-        <a class="btn btn-outline-light mt-2" href="{% url 'store.product' product.id %}"
-        >{% trans 'View' %}</a
-        >
+        <a class="btn btn-outline-light" data-url="{% url 'store.cart_add' product.id %}" onclick="cartUpdate(this)">{% trans 'Add to cart' %}</a>
+        <a class="btn btn-outline-light mt-2" href="{% url 'store.product' product.id %}">{% trans 'View' %}</a>
     </div>
     <div class="card-body">
-        <h6 class="text-muted">{{ product.author.name }}</h6>
-        <h6 class="card-title">{{ product.name }}</h6>
+        <h6 class="text-muted">
+            {% if LANGUAGE_CODE == 'ar' %}
+                {{ product.author.name_ar }}
+            {% else %}
+                {{ product.author.name }}
+            {% endif %}
+        </h6>
+        <h6 class="card-title">
+            {% if LANGUAGE_CODE == 'ar' %}
+                {{ product.name_ar }}
+            {% else %}
+                {{ product.name }}
+            {% endif %}
+        </h6>
         <strong class="fw-bold text-success">{{ product.price|currency }}</strong>
     </div>
 </div>
