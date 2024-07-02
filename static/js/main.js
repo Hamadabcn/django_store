@@ -46,3 +46,7 @@ async function createPaypalSession() {
        notyf.error(e.response.data.message);
    }
  }
+function changeLanguage(lang) {
+  var url = 'set_language/?lang=' + lang;
+  window.location.href = url;
+}

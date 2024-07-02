@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="container my-5">
+    <h1>{{ course.title }}</h1>
+    <p>{{ course.description }}</p>
+
+    {% if course.video %}
+    <div class="video-container">
+        <video width="640" height="360" controls>
+            <source src="{{ course.video.url }}" type="video/mp4">
+            {% trans "Your browser does not support the video tag." %}
+        </video>
+    </div>
+    {% else %}
+    <p>{% trans "No video available for this course." %}</p>
+    {% endif %}
+</div>
+{% endblock %}

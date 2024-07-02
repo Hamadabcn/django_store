@@ -1,8 +1,51 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.utils.translation import gettext as _
-from .models import Product, Slider, Category, Cart
+from .models import Slider, Category, Cart, Course
+from .models import Post
+from .forms import CommentForm
+from .models import Product
+from django.shortcuts import redirect
+from django.conf import settings
+from django.utils.translation import activate
+
+
+def my_view(request):
+    activate('ar')  # Set language to Arabic
+
+
+def set_language(request):
+    lang_code = request.POST.get('language', settings.LANGUAGE_CODE)
+    redirect_to = request.POST.get('next', '/')
+
+    if lang_code and lang_code in dict(settings.LANGUAGES).keys():
+        activate(lang_code)
+        request.session[settings.LANGUAGE_COOKIE_NAME] = lang_code
+
+        # Ensure the redirect URL is safe
+        if not redirect_to.startswith('/'):
+            redirect_to = '/'
+
+        # Update the URL to include the new language code
+        parts = redirect_to.strip('/').split('/')
+        if parts and parts[0] in dict(settings.LANGUAGES).keys():
+            parts[0] = lang_code
+        else:
+            parts.insert(0, lang_code)
+        redirect_to = '/' + '/'.join(parts)
+
+    return redirect(redirect_to)
+
+
+def post_list(request):
+    posts = Post.objects.all()
+    return render(request, 'blog/post_list.html', {'posts': posts})
+
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/post_detail.html', {'post': post})
 
 
 def index(request):
@@ -18,13 +61,20 @@ def index(request):
 
 
 def product(request, pid):
-    product = Product.objects.get(pk=pid)
-    return render(
-        request, 'product.html',
-        {
-            'product': product
-        }
-    )
+    product = get_object_or_404(Product, pk=pid)
+    comments = product.comments.all()
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.product = product  # Associate comment with the product
+            new_comment.save()
+            return redirect('store.product', pid=pid)  # Redirect back to the same product detail page
+    else:
+        comment_form = CommentForm()
+
+    return render(request, 'product.html', {'product': product, 'comment_form': comment_form, 'comments': comments})
 
 
 def category(request, cid=None):
@@ -34,7 +84,7 @@ def category(request, cid=None):
     cid = request.GET.get('category', cid)
     where = {}
     if cid:
-        cat = Category.objects.get(pk=cid)
+        cat = get_object_or_404(Category, pk=cid)
         where['category_id'] = cid
 
     if query:
@@ -108,3 +158,27 @@ def checkout_complete(request):
     return render(
         request, 'checkout_complete.html'
     )
+
+
+def course_detail(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+    return render(request, 'course_detail.html', {'course': course})
+
+
+def new_comment(request, pid):
+    product = get_object_or_404(Product, pk=pid)
+    comments = product.comments.all()
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.product = product
+            new_comment.user = request.user
+            new_comment.save()
+            # Clear the form to prepare for another comment
+            comment_form = CommentForm()  # Reset the form
+    else:
+        comment_form = CommentForm()
+
+    return render(request, 'product.html', {'product': product, 'comment_form': comment_form, 'comments': comments})

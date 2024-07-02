@@ -1,18 +1,21 @@
 {% load i18n %}
+
 <form action="{% url 'store.category' %}" class="d-flex mx-auto">
     <div class="input-group">
         <input
-                name="query"
-                type="text"
-                class="form-control"
-                style="width: 400px"
-                placeholder="{% trans 'Search' %}" value="{{ request.GET.query }}"/>
+            name="query"
+            type="text"
+            class="form-control"
+            style="width: 400px"
+            placeholder="{% trans 'Search' %}"
+            value="{{ request.GET.query }}"
+        />
         <select class="form-control" style="width: 160px" name="category">
             <option value="">{% trans 'All Categories' %}</option>
             {% for category in categories %}
                 <option
-                        value="{{ category.id }}"
-                        {% if category.id|stringformat:'i' == request.GET.category %} selected {% endif %}
+                    value="{{ category.id }}"
+                    {% if category.id|stringformat:'i' == request.GET.category %} selected {% endif %}
                 >{{ category.name }}
                 </option>
             {% endfor %}

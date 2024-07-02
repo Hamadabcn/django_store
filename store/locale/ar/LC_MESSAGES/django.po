@@ -1,0 +1,292 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-27 20:37+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: .\store\models.py:11
+msgid "This is the help text"
+msgstr ""
+
+#: .\store\models.py:37 .\store\models.py:65
+#: .\store\templates\admin\store\order\change_form.html:49
+msgid "Name"
+msgstr "اسم"
+
+#: .\store\models.py:47
+msgid "Category"
+msgstr "جميع الفئات"
+
+#: .\store\models.py:48
+msgid "Categories"
+msgstr "جميع الفئات"
+
+#: .\store\models.py:61
+msgid "Authors"
+msgstr "المؤلفون"
+
+#: .\store\models.py:66
+#, fuzzy
+#| msgid "Description"
+msgid "Short Description"
+msgstr "وصف"
+
+#: .\store\models.py:67 .\store\templates\product.html:48
+msgid "Description"
+msgstr "وصف"
+
+#: .\store\models.py:86
+#, fuzzy
+#| msgid "Products"
+msgid "Product"
+msgstr "منتجات"
+
+#: .\store\models.py:87
+#: .\store\templates\admin\store\order\change_form.html:45
+msgid "Products"
+msgstr "منتجات"
+
+#: .\store\models.py:99 .\store\templates\emails\order.html:74
+msgid "Order"
+msgstr "طلب"
+
+#: .\store\models.py:100
+msgid "Orders"
+msgstr "طلب"
+
+#: .\store\models.py:115 .\store\templates\cart.html:6
+#: .\store\templates\partials\header.html:25
+msgid "Cart"
+msgstr "عربة التسوق"
+
+#: .\store\models.py:116
+msgid "Carts"
+msgstr "عربة التسوق"
+
+#: .\store\models.py:131
+#, fuzzy
+#| msgid "Sliders"
+msgid "Slider"
+msgstr "المتزلجون"
+
+#: .\store\models.py:132
+msgid "Sliders"
+msgstr "المتزلجون"
+
+#: .\store\templates\admin\store\order\change_form.html:8
+#: .\store\templates\emails\order.html:60
+msgid "Customer"
+msgstr "عميل"
+
+#: .\store\templates\admin\store\order\change_form.html:16
+#: .\store\templates\checkout.html:43
+msgid "Email"
+msgstr "بريد إلكتروني"
+
+#: .\store\templates\admin\store\order\change_form.html:24
+#: .\store\templates\checkout.html:50
+msgid "Payment Method"
+msgstr "طريقة الدفع او السداد"
+
+#: .\store\templates\admin\store\order\change_form.html:32
+msgid "Amount"
+msgstr "كمية"
+
+#: .\store\templates\admin\store\order\change_form.html:40
+#: .\store\templates\emails\order.html:88
+msgid "Date"
+msgstr "تاريخ"
+
+#: .\store\templates\admin\store\order\change_form.html:50
+#: .\store\templates\cart.html:52 .\store\templates\emails\order.html:138
+msgid "Price"
+msgstr "سعر"
+
+#: .\store\templates\base.html:8 .\store\templates\emails\order.html:50
+#: .\store\templates\partials\header.html:5
+msgid "Coding Academy"
+msgstr "أكاديمية البرمجة"
+
+#: .\store\templates\base.html:53
+msgid "Coding Academy Blog"
+msgstr "مدونة أكاديمية البرمجة"
+
+#: .\store\templates\base.html:59
+msgid "English"
+msgstr "الإنجليزية"
+
+#: .\store\templates\base.html:60
+msgid "العربية"
+msgstr "العربية"
+
+#: .\store\templates\cart.html:38
+msgid "Your cart is empty"
+msgstr "عربة التسوق فارغة"
+
+#: .\store\templates\cart.html:56 .\store\templates\emails\order.html:185
+msgid "Total"
+msgstr "المجموع"
+
+#: .\store\templates\cart.html:63
+msgid "Proceed to checkout"
+msgstr "الخروج"
+
+#: .\store\templates\category.html:16
+msgid "All"
+msgstr "الجميع"
+
+#: .\store\templates\category.html:36
+msgid "We were not able to find any courses"
+msgstr "لم نتمكن من العثور على أي دورات"
+
+#: .\store\templates\category.html:47 .\store\templates\category.html:51
+msgid "Previous"
+msgstr "سابق"
+
+#: .\store\templates\category.html:56 .\store\templates\category.html:60
+msgid "Next"
+msgstr "التالي"
+
+#: .\store\templates\checkout.html:11
+msgid "Amount to pay"
+msgstr "المبلغ الواجب دفعه"
+
+#: .\store\templates\checkout.html:20
+msgid "Your information"
+msgstr "معلوماتك"
+
+#: .\store\templates\checkout.html:29
+msgid "First Name"
+msgstr "الاسم الأول"
+
+#: .\store\templates\checkout.html:36
+msgid "Last Name"
+msgstr "اسم العائلة"
+
+#: .\store\templates\checkout.html:57
+msgid "Paypal"
+msgstr "باي بال"
+
+#: .\store\templates\checkout.html:67
+msgid "Credit Card"
+msgstr "بطاقة إئتمان"
+
+#: .\store\templates\checkout.html:80
+msgid "Pay Now"
+msgstr "ادفع الآن"
+
+#: .\store\templates\checkout_complete.html:5
+msgid "Request completed"
+msgstr "اكتمل الطلب"
+
+#: .\store\templates\checkout_complete.html:14
+msgid ""
+"Your purchase has been completed successfully, you will receive an email "
+"containing links To download the course you requested!"
+msgstr ""
+"لقد تم إتمام عملية الشراء بنجاح، ستصلك رسالة على البريد الإلكتروني يحتوي على "
+"روابط لتحميل الدورة التي طلبتها"
+
+#: .\store\templates\checkout_complete.html:17
+msgid "Homepage"
+msgstr "الصفحة الرئيسية"
+
+#: .\store\templates\common\product_card.html:13
+#: .\store\templates\product.html:32
+msgid "Add to cart"
+msgstr "أضف إلى السلة"
+
+#: .\store\templates\common\product_card.html:16
+msgid "View"
+msgstr "رؤية"
+
+#: .\store\templates\course_detail.html:13 .\store\templates\product.html:91
+msgid "Your browser does not support the video tag."
+msgstr "متصفحك الحالي لا يدعم تشغيل الفيديو."
+
+#: .\store\templates\course_detail.html:17
+msgid "No video available for this course."
+msgstr "لا يوجد فيديو متاح لهذه الدورة."
+
+#: .\store\templates\emails\order.html:127
+msgid "Book"
+msgstr "كتاب"
+
+#: .\store\templates\partials\footer.html:5
+msgid "© 2024 Hamadabcn. All rights reserved"
+msgstr "© 2024 Hamadabcn كل الحقوق محفوظة"
+
+#: .\store\templates\partials\header_search.html:10
+msgid "Search"
+msgstr "يبحث"
+
+#: .\store\templates\partials\header_search.html:14
+msgid "All Categories"
+msgstr "جميع الفئات"
+
+#: .\store\templates\product.html:14
+#, fuzzy
+#| msgid "Products"
+msgid "Product Image"
+msgstr "منتجات"
+
+#: .\store\templates\product.html:54
+msgid "Trainer"
+msgstr "مدرب"
+
+#: .\store\templates\product.html:61
+msgid "Video"
+msgstr "فيديو"
+
+#: .\store\templates\product.html:97
+msgid "Comments"
+msgstr "تعليقات"
+
+#: .\store\templates\product.html:104
+msgid "Post Comment"
+msgstr "أضف تعليقا"
+
+#: .\store\templates\product.html:107
+msgid "Please log in to leave a comment."
+msgstr "الرجاء تسجيل الدخول لترك تعليق."
+
+#: .\store\templates\product.html:115
+msgid "Posted by"
+msgstr "منشور من طرف"
+
+#: .\store\templates\product.html:115
+msgid "on"
+msgstr "في"
+
+#: .\store\templates\product.html:119
+msgid "No comments yet."
+msgstr "لا تعليقات حتى الآن."
+
+#: .\store\views.py:125
+msgid "The product has been added to your cart"
+msgstr "تمت إضافة المنتج إلى سلة التسوق الخاصة بك"
+
+#: .\store\views.py:145
+msgid "The product has been removed from your cart"
+msgstr "تمت إزالة المنتج من سلة التسوق الخاصة بك"
+
+#~ msgid "Academy Blog"
+#~ msgstr "مدونة أكاديمية"
+
+#~ msgid "Course"
+#~ msgstr "دورة"

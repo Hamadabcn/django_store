@@ -1,110 +1,160 @@
 {% extends 'base.html' %}
-{% load i18n my_filter %}
-
+{% load i18n %}
 {% block content %}
-    <div class="container my-5">
-        <section>
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-md-3">
-                        <div class="swiper my-auto swiper-product">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img
-                                            src="{{ product.image.url }}"
-                                            class="img-fluid"
-                                            alt="..."
-                                    />
-                                </div>
+<div class="container my-5">
+    <section>
+        <!-- Product Details Section -->
+        <div class="card mb-3">
+            <div class="row g-0">
+                <!-- Product Image Carousel -->
+                <div class="col-md-3">
+                    <div class="swiper my-auto swiper-product">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="{{ product.image.url }}" class="img-fluid" alt="{% trans 'Product Image' %}">
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-9">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ product.name.url }}</h5>
-                            <p class="card-text mt-4">
-                                {{ product.short_description }}
-                            </p>
-                            <p class="card-text fs-4">
-                                <strong class="text-success mt-3">
-                                    {{ product.price|currency }}
-                                </strong>
-                            </p>
-                            <button
-                                    class="btn btn-secondary" data-url="{% url 'store.cart_add' product.id %}" onclick="cartUpdate(this)">
-                                {% trans 'Add to cart' %}
-                            </button>
-                        </div>
+                </div>
+                <!-- Product Details -->
+                <div class="col-md-9">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text mt-4">
+                            {{ product.short_description }}
+                        </p>
+                        <p class="card-text fs-4">
+                            <strong class="text-success mt-3">
+                                {{ product.price }}€
+                            </strong>
+                        </p>
+                        <button class="btn btn-secondary" data-url="{% url 'store.cart_add' product.id %}" onclick="cartUpdate(this)">
+                            {% trans 'Add to cart' %}
+                        </button>
                     </div>
                 </div>
             </div>
-        </section>
-        <section>
-            <div class="card">
-                <div class="card-header p-0 bg-white">
-                    <ul
-                            class="nav nav-pills nav-justified"
-                            id="pills-tab"
-                            role="tablist"
-                    >
-                        <li class="nav-item" role="presentation">
-                            <button
-                                    class="nav-link active text-secondary"
-                                    id="pills-home-tab"
-                                    data-bs-toggle="pill"
-                                    data-bs-target="#pills-home"
-                                    type="button"
-                                    role="tab"
-                                    aria-controls="pills-home"
-                                    aria-selected="true"
-                            >
-                                {% trans 'Description' %}
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button
-                                    class="nav-link text-secondary"
-                                    id="pills-profile-tab"
-                                    data-bs-toggle="pill"
-                                    data-bs-target="#pills-profile"
-                                    type="button"
-                                    role="tab"
-                                    aria-controls="pills-profile"
-                                    aria-selected="false"
-                            >
-                                {% trans 'Author' %}
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-                <div class="card-body">
-                    <div class="tab-content" id="pills-tabContent">
-                        <div
-                                class="tab-pane fade show active"
-                                id="pills-home"
-                                role="tabpanel"
-                                aria-labelledby="pills-home-tab"
-                        >
-                            <p class="fs-6 text-muted">
-                                {{ product.description }}
-                            </p>
+        </div>
+    </section>
+
+    <section>
+        <!-- Tabs for Product Details -->
+        <div class="card">
+            <div class="card-header p-0 bg-white">
+                <ul class="nav nav-pills nav-justified" id="pills-tab" role="tablist">
+                    <!-- Description Tab -->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active text-secondary" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                            {% trans 'Description' %}
+                        </button>
+                    </li>
+                    <!-- Author Tab -->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link text-secondary" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                            {% trans 'Trainer' %}
+                        </button>
+                    </li>
+                    <!-- Video Tab -->
+                    {% if product.video %}
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link text-secondary" id="pills-video-tab" data-bs-toggle="pill" data-bs-target="#pills-video" type="button" role="tab" aria-controls="pills-video" aria-selected="false">
+                            {% trans 'Video' %}
+                        </button>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" id="pills-tabContent">
+                    <!-- Description Tab Content -->
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <p class="fs-6 text-muted">
+                            {{ product.description }}
+                        </p>
+                    </div>
+                    <!-- Author Tab Content -->
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        <p class="fs-6 text-muted">
+                            {{ product.author.name }}
+                        </p>
+                        <p class="fs-6 text-muted">
+                            {{ product.author.bio }}
+                        </p>
+                    </div>
+                    <!-- Video Tab Content -->
+                    {% if product.video %}
+                    <div class="tab-pane fade" id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
+                        <!-- Video Player -->
+                        <div class="video-wrapper">
+                            <video width="100%" controls>
+                                <source src="{{ product.video.url }}" type="video/mp4">
+                                {% trans 'Your browser does not support the video tag.' %}
+                            </video>
                         </div>
-                        <div
-                                class="tab-pane fade"
-                                id="pills-profile"
-                                role="tabpanel"
-                                aria-labelledby="pills-contact-tab"
-                        >
-                            <p class="fs-6 text-muted">
-                                {{ product.author.name }}
-                            </p>
-                            <p class="fs-6 text-muted">
-                                {{ product.author.bio }}
-                            </p>
+
+                        <!-- Larger Comment Section -->
+                        <div class="video-comments mt-4">
+                            <h5>{% trans 'Comments' %}</h5>
+                            <hr>
+                            {% if user.is_authenticated %}
+                            <!-- Form for adding a comment -->
+                            <form method="post" action="{% url 'add_comment' product.id %}" style="width: 100%;">
+                                {% csrf_token %}
+                                {{ comment_form.as_p }}
+                                <button type="submit" class="btn btn-primary mt-2">{% trans 'Post Comment' %}</button>
+                            </form>
+                            {% else %}
+                            <p>{% trans 'Please log in to leave a comment.' %}</p>
+                            {% endif %}
+
+                            <!-- Display existing comments -->
+                            {% for comment in comments %}
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <p>{{ comment.text }}</p>
+                                    <small class="text-muted">{% trans 'Posted by' %} {{ comment.author }} {% trans 'on' %} {{ comment.created_at }}</small>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <p>{% trans 'No comments yet.' %}</p>
+                            {% endfor %}
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    .video-wrapper {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio (change to your video's aspect ratio if different) */
+        margin-bottom: 20px;
+    }
+
+    .video-wrapper video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .video-comments {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Additional CSS to make the comment form wider */
+    .video-comments form {
+        width: 100%;
+        max-width: 100%;
+    }
+</style>
+
 {% endblock %}

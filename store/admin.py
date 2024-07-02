@@ -53,3 +53,9 @@ class OrderAdmin(admin.ModelAdmin):
         if obj.transaction:
             return obj.transaction.get_payment_method_display()
         return None
+
+
+@admin.register(models.Course)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description', 'video')
+    list_per_page = 20

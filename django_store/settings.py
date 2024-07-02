@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os.path
 from pathlib import Path
-from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,15 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-df_h#y!0&vyldj#+)$vb1#m)#yqc-#$)1bw8rolc3+#^c+9t4q'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = [
-    'happy-book-store.com',
-    '127.0.0.1',
-]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -45,12 +42,16 @@ INSTALLED_APPS = [
     'store',
     'checkout',
     'reports',
+    'blog',
+    'modeltranslation',
+    'django_store',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -58,14 +59,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
 ROOT_URLCONF = 'django_store.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            'templates'
-        ],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,11 +73,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
                 'store.custom_context_processor.store_website',
             ],
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'django_store.wsgi.application'
 
@@ -115,12 +117,22 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+LANGUAGES = [
+    ('en', _('English')),
+    ('ar', _('Arabic')),
+]
 
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
+TIME_ZONE = 'Europe/Madrid'
+LANGUAGE_CODE = 'en-us'  # Default language code
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
 
 MEDIA_URL = '/media/'
@@ -146,10 +158,10 @@ EMAIL_PORT = '2525'
 
 SITE_URL = 'http://127.0.0.1:8000'
 
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51OXT6NLQByQGef51ob2b4qIxY01vrjIYSqRLnqKpN08tcMJhMyb8DVxUNaIounnrDyxv4oTWECGKFBYWA9vHtjEq00Ck6jYToW'
-STRIPE_SECRET_KEY = 'sk_test_51OXT6NLQByQGef51Q1YObvsEgwFe3OGUS068mnlXyOSKqCfgLoM0gdJjPTmE3r8HCFLdEQuc6KLnrKzKWznb0RjF00jJbYfALb'
-STRIPE_ENDPOINT_SECRET = 'whsec_fd6692e18510a360a13152eb9f4bb691af26dc5570a4f307164b621531a5a1ce'
+STRIPE_PUBLISHABLE_KEY = ('')
+STRIPE_SECRET_KEY = ('')
+STRIPE_ENDPOINT_SECRET = ''
 
 PAYPAL_TEST = True
-PAYPAL_EMAIL = 'sb-eiwjh26708209@business.example.com'
+PAYPAL_EMAIL = ''
 CURRENCY = 'EUR'

@@ -1,27 +1,82 @@
+<!DOCTYPE html>
 {% load static %}
 {% load i18n %}
-<!DOCTYPE html>
-<html lang="ar" class="h-100" dir="rtl">
+<html lang="{{ LANGUAGE_CODE }}" class="h-100" dir="{% if LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{% trans 'App Name' %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% trans 'Coding Academy' %}</title>
     <script defer src="{% static 'js/819.2ec26ef5.js' %}"></script>
     <script defer src="{% static 'js/app.0c66f515.js' %}"></script>
     <link href="{% static 'css/819.css' %}" rel="stylesheet">
     <link href="{% static 'css/app.css' %}" rel="stylesheet">
     <script src="https://js.stripe.com/v3/"></script>
+
+    <!-- Custom CSS for header -->
+    <style>
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        nav ul li {
+            margin-right: 20px;
+        }
+        nav ul li a {
+            color: brown;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .language-switcher {
+            display: flex;
+            align-items: center;
+        }
+        .language-switcher form {
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        .language-switcher select {
+            margin-left: 10px;
+            padding: 5px;
+            font-size: 1rem;
+        }
+    </style>
 </head>
 
 <body class="d-flex flex-column h-100 bg-light">
+<!-- Navigation -->
+<nav>
+    <ul>
+        <li><a href="{% url 'blog:blog_home' %}">{% trans 'Coding Academy Blog' %}</a></li>
+        <!-- Language selection form -->
+        <li class="language-switcher">
+            <form action="{% url 'set_language' %}" method="post">
+                {% csrf_token %}
+                <select name="language" id="language-select" onchange="this.form.submit()">
+                    <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>{% trans 'English' %}</option>
+                    <option value="ar" {% if LANGUAGE_CODE == 'ar' %}selected{% endif %}>{% trans 'العربية' %}</option>
+                </select>
+                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+            </form>
+        </li>
+    </ul>
+</nav>
+
+<!-- Include header partial -->
 {% include 'partials/header.html' %}
 
 <main>
     {% block content %}
     {% endblock %}
 </main>
+
+<!-- Include footer partial -->
 {% include 'partials/footer.html' %}
 
+<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="{% static 'js/main.js' %}"></script>
 <script src="{% static 'js/stripe.js' %}"></script>

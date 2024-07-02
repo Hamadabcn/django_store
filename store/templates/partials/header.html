@@ -2,7 +2,8 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
     <div class="container">
-        <a class="navbar-brand" href="/"> {% trans 'Happy Books Store' %} </a>
+        <a class="navbar-brand" href="/"> {% trans 'Coding Academy' %} </a>
+
         <button
                 class="navbar-toggler"
                 type="button"
@@ -36,11 +37,11 @@
         >
             <ul class="navbar-nav my-2 my-lg-0">
                 {% for category in categories %}
-                    <li class="nav-item">
-                        <a class="nav-link mx-1" href="{% url 'store.category' category.id %}" role="button">
-                            {{ category.name }}
-                        </a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-1" href="{% url 'store.category' category.id %}" role="button">
+                        {{ category.name }}
+                    </a>
+                </li>
                 {% endfor %}
             </ul>
         </div>
