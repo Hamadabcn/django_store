@@ -1,18 +1,36 @@
-Educational Academy project using Django:
-1. What is required is to create a website for an educational academy. This academy works to sell its courses to students. Payment must be created using Stripe.
+Django Store it's an Academy Store selling courses
 
-2. In the top menu there will be a drop-down list or two options next to each other, one for the Arabic language and the other for the English language. The user can switch between languages to change the language of the site. 
+How to Run the Program:
 
-3. A control panel must be created through which the administrator can add new courses to the site.
+1. Install Requirements
+First, make sure you have Python and pip installed on your system. Then, navigate to your project directory and install the required dependencies using pip:
+pip install -r requirements.txt
 
-4. Courses are closed to all users. After purchasing the course and the success of the purchase process, the course is opened only to the person who purchased it.
+2. Set Up Virtual Environment
+# Create a virtual environment
+python -m venv env
 
-5. Within each course, you can put one video clip for the purpose of experimenting.
+# Activate the virtual environment (Windows)
+env\Scripts\activate
 
-6. Below the video clip, you must create a section for comments and responses.
+# Activate the virtual environment (Mac/Linux)
+source env/bin/activate
 
-7. The site will contain a blog, which must be created with a separate app within the project.
+3. Run the Django Server
+Once the dependencies are installed and the virtual environment (if used) is activated, you can run the Django development server:
+python manage.py runserver
 
-8. The final project must be uploaded to one of the platforms so that we can preview it.
+This will start the development server locally. You can access the application at http://localhost:8000/
 
-9. Anything not explained in the text is left to your imagination. You can add and implement anything you deem appropriate for the project.
+Modify settings.py as needed for database configuration, static files, etc.
+
+Login Information
+The default username and password for accessing the platform are:
+
+Username: admin
+Password: admin
+Sample Videos
+Currently, we have provided sample descriptive videos specifically for the Python project. These videos offer detailed explanations and insights to help you understand the project better.
+
+Course Authors
+In addition to the sample videos, you can find information about the authors who have contributed to the courses. This includes their backgrounds, areas of expertise, and other relevant details.
