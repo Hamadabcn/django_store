@@ -17,7 +17,7 @@ env\Scripts\activate
 source env/bin/activate
 
 3. Run the Django Server
-Once the dependencies are installed and the virtual environment (if used) is activated, you can run the Django development server:
+Once the dependencies are installed and the virtual environment is activated, you can run the Django development server:
 python manage.py runserver
 
 This will start the development server locally. You can access the application at http://localhost:8000/
