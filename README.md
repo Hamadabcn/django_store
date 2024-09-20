@@ -1,4 +1,10 @@
 
+
+https://github.com/user-attachments/assets/291f30e7-56c4-4e9a-bde1-b53725d1dcba
+
+![django store](https://github.com/user-attachments/assets/853f1ec8-8237-4736-b96a-95c75acbc3f0)
+![django store 01](https://github.com/user-attachments/assets/6d8f077b-73d2-49fb-9f42-66aba8de7a0a)
+
 Django Store it's an Academy Store selling courses
 
 How to Run the Program:
